@@ -218,6 +218,8 @@ function Scrolly () {
     })
 
     // Lastly, look up page hash & scroll to appropriate location
+    var url = readURL()
+    if (!url) { handleScroll(0) }
     window.scrollTo(0, sectionPositions[readURL()])
   }
 }

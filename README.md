@@ -19,6 +19,10 @@ Also, take a look at `index.html` and `scrolly-slides.js` to see how it's built.
 - [SimpleSlides](https://github.com/jennschiffer/SimpleSlides) by Jenn Schiffer
 
 ## Changelog
+#### v1.1
+
+- fix opacity focus issue for very 1st element
+
 #### v1.0
 
 - the original commit
