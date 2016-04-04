@@ -1,0 +1,16 @@
+svg {
+  font: 10px sans-serif;
+}
+
+.line {
+  fill: none;
+  stroke: hotpink;
+  stroke-width: 4px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

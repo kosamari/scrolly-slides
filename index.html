@@ -1,0 +1,232 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Scrolly Slides</title>
+    <style type="text/css" media="screen">
+    /*
+    * CSS for the scrolly-slides it necessary for the layout.
+    * Change it at your own risk. You might want to add custom css at the end.
+    */
+      body, html{
+        height:100%;
+        margin:0;
+      }
+      .scrolly-article {
+        width: 0px;
+        overflow: hidden;
+        z-index: -1;
+      }
+      .scrolly-section {
+        padding:20px;
+        opacity: .2;
+      }
+      .scrolly-slide {
+        z-index: 1;
+        position: fixed;
+        top: 0px;
+        height:100%;
+        width:100%;
+        background-color: #fff;
+        padding:30px;
+        overflow: scroll;
+      }
+
+      /* You might want to change this to style you like */
+      .scrolly-slide h1{
+        font-size: 10vw;
+      }
+      .scrolly-slide h2{
+        font-size: 5vw;
+      }
+      .scrolly-slide h3{
+        font-size: 4vw;
+      }
+      .scrolly-slide h4{
+        font-size: 3vw;
+      }
+      .scrolly-slide h5{
+        margin-bottom: 0px;
+        font-size: 3vw;
+      }
+      .scrolly-slide h6{
+        margin: 0px;
+        font-size: 2.5vw;
+      }
+      .scrolly-slide p{
+        font-size: 3vw;
+      }
+      .scrolly-slide li{
+        font-size: 2.5vw;
+      }
+      .scrolly-slide pre{
+        font-size: 2vw;
+      }
+      /* You might want to use some kind of syntax highlighting library */
+      pre {
+        overflow: scroll;
+        background-color: #efefef;
+        padding:10px;
+      }
+      code{
+        color:#CB0000;
+      }
+    </style>
+
+    <!-- Style Sheets for Demo -->
+    <link rel="stylesheet" type="text/css" href="asset/css/toggle.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/linechart.css">
+
+    <!-- Library dependency -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="scrolly-slides.js"></script>
+  </head>
+  <body>
+
+    <!--
+    ARTICLE SECTIONS
+    This is the texts shown on side used for speaker notes
+    -->
+    <article class="scrolly-article">
+      <!-- section for slide "0" -->
+      <section class="scrolly-section" data-slide-id="0">
+        <h1>Article Panel</h1>
+        <p>This is article panel. In regular scrollytelling this is where most of text is displayed. For presentation slide, you can use this space for speaker notes.</p>
+        <p></p>
+        <p>You can display this view by calling the toggle method <code>scrolly.toggleArticle(true)</code>. To hide this view, pass <code>false</code>.</p>
+      </section>
+
+      <!-- section for slide "mysideid" -->
+      <section class="scrolly-section" data-slide-id="myslideid">
+        <h1>Section Element</h1>
+        <p>Each section in article panel should have <code>scrolly-section</code> class and <code>data-slide-id</code> attribute corresponding to the same attribute in slide element.</p>
+        <p>Mark up for this section looks like this</p>
+        <pre>&lt;section class=&quot;scrolly-section&quot; data-slide-id="myslideid"&gt;
+    &lt;h1&gt;How to controll&lt;/h1&gt;
+  &lt;/section&gt;</pre>
+        <p>When each section is active (clocest to top), corresponding slide element will be displaced.</p>
+      </section>
+
+      <!-- section for slide "fragment" -->
+      <section class="scrolly-section" data-slide-id="fragment" data-fragment-ids="1">
+        <h1>Fragment</h1>
+        <p>You can specify which fragmented element to be displayed in a slide by setting <code>data-fragment-ids</code></p>
+      </section>
+
+      <section class="scrolly-section" data-slide-id="fragment" data-fragment-ids="1,2">
+        <p>For exampe, I have <code>data-fragment-ids="1,2"</code> set for this section.</p>
+      </section>
+
+      <section class="scrolly-section" data-slide-id="fragment" data-fragment-ids="1,2,3">
+        <p>Pretty cool, right ?</p>
+      </section>
+
+      <!-- section for slide "event" -->
+      <section class="scrolly-section" data-slide-id="event" data-fragment-ids="1" data-event-name="draw">
+        <h1>Event</h1>
+        <p>You can use <code>data-event-name</code> attribute to trigger <code>new Event("<-event-name->")</code>.</p>
+        <p>For example, once next section become active, it"ll trigger <code>update</code> event. I have D3 event listener set up to update the chart.</p>
+      </section>
+
+      <section class="scrolly-section" data-slide-id="event" data-event-name="update" data-fragment-ids="1,2">
+        <p>Booon...</p>
+        <p>Event sent</p>
+      </section>
+
+      <!-- section for slide "last" -->
+      <section class="scrolly-section scrolly-section-last" data-slide-id="last">
+        <h1>Last section</h1>
+        <p>make sure your last section has <code>.scrolly-section-last</code> class dadded.
+        This will add necessary margin at the bottom.</p>
+        <pre>&lt;section class=&quot;scrolly-section-last scrolly-section&quot; data-slide-id="4"&gt;
+    &lt;h1&gt;Last section&lt;/h1&gt;
+  &lt;/section&gt;</pre>
+      </section>
+
+    </article>
+
+
+    <!--
+    SLIDE ELEMENTS
+    This is the main "page" for each slides
+    -->
+    <!-- slide "0" -->
+    <div class="scrolly-slide" data-slide-id="0">
+      <h1>Scrolly Slide</h1>
+      <h2>Presentation slides in "Scrollytelling" format</h2>
+      <p>Toggle this to see speaker notes!
+        <div class="switch">
+          <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" onchange="scrolly.toggleArticle(this.checked)">
+          <label for="cmn-toggle-4"></label>
+        </div>
+      </p>
+    </div>
+
+    <!-- slide "myslideid" -->
+    <div class="scrolly-slide" data-slide-id="myslideid">
+      <h2>Slide Element</h2>
+      <p>Each slide element must have <code>scrolly-slide</code> class and <code>data-slide-id</code> attribute.</p>
+      <p><code>data-slide-id</code> can be any string, but must be same as corresponding section element in article view.
+      </p>
+      <p>Markup for this element looks like this.
+      </p>
+      <pre>&lt;div class="scrolly-slide" data-slide-id="myslideid"&gt;
+      &lt;h3&gt;Necessary class and attributes&lt;/h3&gt;
+  &lt;/div&gt;</pre>
+    </div>
+
+    <!-- slide "fragment" -->
+    <div class="scrolly-slide" data-slide-id="fragment">
+      <span  data-fragment-id="1">
+        <h2>Fragment</h2>
+        <p>You can set fragment with <code>data-fragment-id</code> attribute.</p>
+      </span>
+      <p data-fragment-id="2">
+        just like ... this
+      </p>
+      <pre data-fragment-id="3">&lt;div class="scrolly-slide" data-slide-id="fragment"&gt;
+    &lt;span  data-fragment-id=&quot;1&quot;&gt;
+      &lt;h3&gt;Fragment&lt;/h3&gt;
+    &lt;/span&gt;
+    &lt;p data-fragment-id=&quot;2&quot;&gt;
+      2nd fragment
+    &lt;/p&gt;
+    &lt;p data-fragment-id=&quot;3&quot;&gt;
+      3rd fragment
+    &lt;/p&gt;
+  &lt;/div&gt;</pre>
+    </div>
+
+    <!-- slide "event" -->
+    <div class="scrolly-slide" data-slide-id="event">
+      <h2 data-fragment-id="1">This wonderful Chart</h2>
+      <div id="chart" data-fragment-id="1"></div>
+      <h5 data-fragment-id="2">Updated by event</h5>
+    </div>
+
+    <!-- slide "last" -->
+    <div class="scrolly-slide" data-slide-id="last">
+      <h2>Get started</h2>
+      <h5>Code: <a href="https://github.com/kosamari/scrolly-slides" title="">https://github.com/kosamari/scrolly-slides</a></h5>
+      <h6>Made by <a href="https://twitter.com/kosamari" title="">@kosamari</a></h6>
+      <h6>License: <a href="https://github.com/kosamari/scrolly-slides/blob/master/LICENSE" title="">MIT</a></h6>
+
+      <h5>Learn more about Scrollytelling</h5>
+        <li><a href="https://www.youtube.com/watch?v=fYQGgaE_b4I" title="">SO YOU THINK YOU CAN SCROLL</a> by Jim Vallandingham</li>
+        <li><a href="http://1wheel.github.io/graph-scroll/" title="">graph-scroll.js</a> by Adam Pearce</li>
+
+      <h5>Don't wanna scroll? </h5>
+        <li><a href="https://github.com/jennschiffer/SimpleSlides" title="">SimpleSlides</a> by Jenn Schiffer</li>
+    </div>
+
+    <!-- JavaScript files used for Demo -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="asset/js/linechart.js"></script>
+
+    <!-- INITIALIZE SCROLLY SLIDES -->
+    <script>
+      var scrolly = new Scrolly()
+      scrolly.init({show_article: false}) //true to show article view by default
+    </script>
+  </body>
+</html>

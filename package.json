@@ -1,0 +1,12 @@
+{
+  "name": "scrolly-slides",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "scroll",
+    "slides",
+    "scrollytelling"
+  ],
+  "author": "Mariko Kosaka",
+  "license": "MIT"
+}
