@@ -190,6 +190,7 @@ function Scrolly () {
           }
           break
         case 32: // space
+          e.preventDefault()
           if (next < sectionPositions.length) {
             window.scrollTo(0, sectionPositions[next])
           }
